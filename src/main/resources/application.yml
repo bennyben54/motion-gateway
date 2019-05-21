@@ -1,16 +1,11 @@
 server:
   port: 8082
-spring:
-  cloud:
-    gateway:
-      routes:
-        - id: route_cam1
-          uri: https://example.org
-          predicates:
-            - After=2017-01-20T17:42:47.789-07:00[America/Denver]
+servers:
+  camera-server: http://192.168.1.31
+  auth-server: http://localhost:8080
+  rest-server: http://localhost:8081
 security:
   oauth2:
     client:
       client-id: first-client
       client-secret: noonewilleverguess
-    auth-server: http://localhost:8080/oauth
