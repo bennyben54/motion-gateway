@@ -1,11 +1,12 @@
 server:
-  port: 8082
+  port: 8090
 servers:
-  camera-server: http://192.168.1.31
-  auth-server: http://localhost:8080
-  rest-server: http://localhost:8081
+  camera-server: http://localhost
+  auth-server: http://localhost:8083
+  api-user-server: http://localhost:8083
+  api-custom-server: http://localhost:8084
 security:
   oauth2:
     client:
-      client-id: first-client
-      client-secret: noonewilleverguess
+      client-id: beo-app-client
+      client-secret: e6aec4e0-e421-415a-8f84-d06237963831

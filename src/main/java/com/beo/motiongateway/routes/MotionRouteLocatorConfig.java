@@ -13,8 +13,10 @@ public class MotionRouteLocatorConfig {
     private String cameraServer;
     @Value("${servers.auth-server}")
     private String authServer;
-    @Value("${servers.rest-server}")
-    private String restServer;
+    @Value("${servers.api-user-server}")
+    private String apiUserServer;
+    @Value("${servers.api-custom-server}")
+    private String apiCustomServer;
 
     private RouteLocator build(RouteLocatorBuilder builder) {
         return builder.routes()
@@ -24,12 +26,16 @@ public class MotionRouteLocatorConfig {
                         .uri(String.format("%s:8082", cameraServer)))
 
                 .route("route_auth", r -> r.path("/oauth/**")
-                        .filters(f -> f.rewritePath("/oauth/(?<segment>.*)", "/$1"))
+                        //.filters(f -> f.rewritePath("/oauth/(?<segment>.*)", "/$1"))
                         .uri(authServer))
 
-                .route("route_rest", r -> r.path("/rest/**")
-                        .filters(f -> f.rewritePath("/rest/(?<segment>.*)", "/$1"))
-                        .uri(restServer))
+                .route("route_api_user", r -> r.path("/api/user/**")
+                        //.filters(f -> f.rewritePath("/api/user/(?<segment>.*)", "/$1"))
+                        .uri(apiUserServer))
+
+                .route("route_api_custom", r -> r.path("/api/custom/**")
+                        //.filters(f -> f.rewritePath("/api/custom/(?<segment>.*)", "/$1"))
+                        .uri(apiCustomServer))
 
                 .build();
     }
