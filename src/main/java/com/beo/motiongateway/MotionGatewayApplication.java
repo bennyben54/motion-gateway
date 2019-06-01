@@ -29,17 +29,18 @@ public class MotionGatewayApplication {
     @Bean
     public CorsWebFilter corsFilter() {
 
-        CorsConfiguration config = new CorsConfiguration();
-
-        // Possibly...
-        // config.applyPermitDefaultValues()
-
+        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        final CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
         config.addAllowedOrigin("*");
         config.addAllowedHeader("*");
-        config.addAllowedMethod("*");
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        config.addAllowedMethod("OPTIONS");
+        config.addAllowedMethod("HEAD");
+        config.addAllowedMethod("GET");
+        config.addAllowedMethod("PUT");
+        config.addAllowedMethod("POST");
+        config.addAllowedMethod("DELETE");
+        config.addAllowedMethod("PATCH");
         source.registerCorsConfiguration("/**", config);
 
         return new CorsWebFilter(source);
