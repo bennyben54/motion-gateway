@@ -9,8 +9,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class MotionRouteLocatorConfig {
 
-    @Value("${servers.camera-server}")
-    private String cameraServer;
+    @Value("${servers.camera1-server}")
+    private String camera1Server;
+    @Value("${servers.camera2-server}")
+    private String camera2Server;
     @Value("${servers.auth-server}")
     private String authServer;
     @Value("${servers.api-user-server}")
@@ -21,9 +23,9 @@ public class MotionRouteLocatorConfig {
     private RouteLocator build(RouteLocatorBuilder builder) {
         return builder.routes()
                 .route("route_cam1", r -> r.path("/camera1")
-                        .uri(String.format("%s:8081", cameraServer)))
+                        .uri(camera1Server))
                 .route("route_cam2", r -> r.path("/camera2")
-                        .uri(String.format("%s:8082", cameraServer)))
+                        .uri(camera2Server))
 
                 .route("route_auth", r -> r.path("/oauth/**")
                         //.filters(f -> f.rewritePath("/oauth/(?<segment>.*)", "/$1"))

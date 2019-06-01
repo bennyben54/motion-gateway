@@ -1,7 +1,8 @@
 server:
   port: 8090
 servers:
-  camera-server: http://localhost
+  camera1-server: http://localhost:8081
+  camera2-server: http://localhost:8082
   auth-server: http://localhost:8083
   api-user-server: http://localhost:8083
   api-custom-server: http://localhost:8084
