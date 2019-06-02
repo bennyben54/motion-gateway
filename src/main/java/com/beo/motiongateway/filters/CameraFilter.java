@@ -16,10 +16,9 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Component
 @Order(0)
@@ -30,8 +29,6 @@ public class CameraFilter implements GlobalFilter {
     private static final String AUTHORIZATION = "Authorization";
     private static final String BEARER = "Bearer ";
     public static final String BEARER_QUERY_PARAM = "bearer";
-
-    private final Set<String> tokenSet = new HashSet<>();
 
     @Autowired
     private OAuthClient oAuthClient;
@@ -49,7 +46,6 @@ public class CameraFilter implements GlobalFilter {
     /**
      * Bearer token can be taken in @QueryParam("bearer") or in "Authorization = Bearer token".<br>
      * Priority is given to  @QueryParam("bearer").
-     *
      * @param request
      * @param path
      */
@@ -83,18 +79,15 @@ public class CameraFilter implements GlobalFilter {
                         () -> generateHeaderException("No Bearer found")
                 );
 
-        if (!tokenSet.contains(bearer)) {
-            User checkToken;
-            try {
-                checkToken = oAuthClient.checkToken(bearer);
-            } catch (Exception e) {
-                throw generateHeaderException(e.getMessage());
-            }
+        User checkToken;
+        try {
+            checkToken = oAuthClient.checkToken(bearer);
+        } catch (Exception e) {
+            throw generateHeaderException(e.getMessage());
+        }
 
-            if (checkToken == null || !checkToken.isActive()) {
-                throw generateHeaderException("Invalid token");
-            }
-            tokenSet.add(bearer);
+        if (checkToken == null || !checkToken.isActive()) {
+            throw generateHeaderException("Invalid token");
         }
 
     }
