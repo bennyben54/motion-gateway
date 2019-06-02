@@ -50,7 +50,7 @@ public class CameraFilter implements GlobalFilter {
      * @param path
      */
     private void specificCheckTokenForCameraRequests(ServerHttpRequest request, RequestPath path) {
-        log.info(String.format("Path = [%s]", path));
+        log.info(String.format("specificCheckTokenForCameraRequests = [%s]", path));
         List<String> bearerList = request.getQueryParams().get(BEARER_QUERY_PARAM);
         if (bearerList == null || bearerList.isEmpty()) {
 

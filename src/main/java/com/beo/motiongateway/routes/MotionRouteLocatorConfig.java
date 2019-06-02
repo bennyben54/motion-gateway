@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class MotionRouteLocatorConfig {
 
+    @Value("${servers.camera-conf-server}")
+    private String cameraConfServer;
     @Value("${servers.camera1-server}")
     private String camera1Server;
     @Value("${servers.camera2-server}")
@@ -22,6 +24,8 @@ public class MotionRouteLocatorConfig {
 
     private RouteLocator build(RouteLocatorBuilder builder) {
         return builder.routes()
+                .route("route_cam1", r -> r.path("/camera/conf")
+                        .uri(cameraConfServer))
                 .route("route_cam1", r -> r.path("/camera1")
                         .uri(camera1Server))
                 .route("route_cam2", r -> r.path("/camera2")

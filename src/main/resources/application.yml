@@ -1,6 +1,7 @@
 server:
   port: 8090
 servers:
+  camera-conf-server: http://localhost:8080
   camera1-server: http://localhost:8081
   camera2-server: http://localhost:8082
   auth-server: http://localhost:8083
