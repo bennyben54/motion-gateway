@@ -6,7 +6,8 @@ servers:
   camera2-server: http://localhost:8082
   auth-server: http://localhost:8083
   api-user-server: http://localhost:8083
-  api-custom-server: http://localhost:8084
+  api-command-server: http://localhost:8084
+  api-custom-server: http://localhost:8085
 security:
   oauth2:
     client:

@@ -19,6 +19,8 @@ public class MotionRouteLocatorConfig {
     private String authServer;
     @Value("${servers.api-user-server}")
     private String apiUserServer;
+    @Value("${servers.api-command-server}")
+    private String apiCommandServer;
     @Value("${servers.api-custom-server}")
     private String apiCustomServer;
 
@@ -38,6 +40,10 @@ public class MotionRouteLocatorConfig {
                 .route("route_api_user", r -> r.path("/api/user/**")
                         //.filters(f -> f.rewritePath("/api/user/(?<segment>.*)", "/$1"))
                         .uri(apiUserServer))
+
+                .route("route_api_command", r -> r.path("/api/command/**")
+                        //.filters(f -> f.rewritePath("/api/command/(?<segment>.*)", "/$1"))
+                        .uri(apiCommandServer))
 
                 .route("route_api_custom", r -> r.path("/api/custom/**")
                         //.filters(f -> f.rewritePath("/api/custom/(?<segment>.*)", "/$1"))
